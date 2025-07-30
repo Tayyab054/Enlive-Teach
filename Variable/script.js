@@ -1,3 +1,16 @@
+    //  scope //
+    
+    {
+        let x = 10;
+        var y = 20;
+    }
+
+    console.log(x); // ReferenceError: x is not defined
+    console.log(y); // 20
+
+
+
+
 var petDog="Rex";
 var petcat="Pepper";
 console.log(petDog);
