@@ -56,3 +56,27 @@ while (year <= 2022) {
     console.log(year);
     year++;
 }
+ 
+ // reading 
+var cubes = 'ABCDEFG';
+
+for (var i = 0; i < cubes.length; i++) {
+    var styles = "font-size: 40px; border-radius: 10px; border: 1px solid blue; background: pink; color: purple";
+    console.log("%c" + cubes[i], styles)
+}
+
+// for (var i = 0; i < document.body.children.length; i++) {
+//     document.body.children[i].style.cssText =
+//         "font-size: 40px; border-radius: 10px; border: 1px solid blue; background: pink; color: purple";
+// }
+// let container = document.getElementById("word");
+// let text = container.innerText;  // "ABC"
+// container.innerHTML = "";        // Clear original text
+
+// for (let i = 0; i < text.length; i++) {
+//     let span = document.createElement("span");
+//     span.innerText = text[i]+ ""; // Add space after each letter
+//     span.style.cssText =
+//         "display: inline-block; font-size: 40px; border-radius: 10px; border: 1px solid blue; background: pink; color: purple; text-align: center; margin: 5px; width: 50px; height: 50px; line-height: 50px;";
+//     container.appendChild(span);
+//}
