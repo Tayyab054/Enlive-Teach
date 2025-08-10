@@ -34,6 +34,7 @@ function diffAndPatch(parent, oldNode, newNode) {
 
 // Initial tree
 let oldTree = h("p", "Hello World!");
+
 const root = document.getElementById("app");
 root.appendChild(render(oldTree));
 
@@ -44,4 +45,6 @@ document.getElementById("update").addEventListener("click", () => {
     diffAndPatch(root, oldTree, newTree);
     oldTree = newTree; // update reference
 });
+
+document.addEventListener
 
