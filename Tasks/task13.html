@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Module with Closures</title>
+</head>
+<body>
+    <button id="btn1">counter1</button>
+    <span id="display1">0</span>
+    <br><br>
+    <button id="btn2">counter2</button>
+    <span id="display2">0</span>
+    <script>
+        function createCounter(){
+            let count=0;
+            return{
+                incremet:function(){
+                    count++;
+                    return count;
+                },
+                decremnt:function(){
+                    count--;
+                    return count;
+                },
+                reset:function(){
+                    count=0;
+                    return count;
+                },
+                getvalue:function(){
+                    return count;
+                }
+            };
+          
+        }
+          const counter1=createCounter();
+          const counter2=createCounter();
+          document.getElementById('btn1').addEventListener('click',()=>{
+            document.getElementById('display1').textContent=counter1.incremet();
+          })
+          document.getElementById('btn2').addEventListener('click',()=>{
+            document.getElementById('display2').textContent=counter2.incremet();
+          })
+        
+        
+    </script>
+</body>
+</html>
