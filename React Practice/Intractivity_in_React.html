@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Intrctivity in React</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+        function Conter(){
+            const [count ,steCount]=useState(0);
+            return(
+                <div>
+                    <h3>Currunt Count : {count}</h3>
+                    <button onClick={()=>steCount(count+1)}>Plus</button>
+                    
+                    </div>
+            );
+            
+        }
+    // Event Handling
+    function ForExample() {
+        const [name,setname]=useState("");
+        function handleChange(event){
+            setname(event.target.value);
+        }
+        return(
+            <div >
+            <p>Hello! {name}</p>
+            <input type="text" placeholder="Enter Name.." onChange={handleChange} />
+            </div>
+        );
+    }
+    // State Updates in React
+    function BatchExample(){
+        const [count,setcount]=useState(0);
+        function handleClick(){
+            // setcount(count+1);
+            // setcount(count+1);
+            // setcount(count+1); // expeced +3 butonly 1
+            setcount(prev=>prev+1)
+            setcount(prev=>prev+1)
+            setcount(prev=>prev+1)
+        }
+        return(
+            <div>
+            <p> {count}</p>
+            <button onClick={handleClick}>Plus 3</button>
+             </div>
+        )
+
+    }
+         ReactDOM.createRoot(document.getElementById("root")).render(
+                <div >
+                    <Conter />
+                    <ForExample />
+                    <BatchExample/>
+                </div>
+            );
+    </script>
+</body>
+</html>

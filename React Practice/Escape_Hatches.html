@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Escape Hatches</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useRef, useState, useEffect } = React;
+
+    // 1. Refs example
+    function InputFocus() {
+      const inputRef = useRef(null); // should be null, not 1
+
+      function handleClick() {
+        inputRef.current.focus(); // Directly focuses the input
+      }
+
+      return (
+        <div>
+          <input ref={inputRef} type="text" placeholder="Click button to focus me" />
+          <button onClick={handleClick}>Focus Input</button>
+        </div>
+      );
+    }
+
+    // 2. Effects example
+    function Timer() {
+      const [count, setCount] = useState(0);
+
+      useEffect(() => {
+        const interval = setInterval(() => setCount((c) => c + 1), 1000);
+
+        return () => clearInterval(interval); // Cleanup when unmounts
+      }, []);
+
+      return <p>Seconds passed: {count}</p>;
+    }
+
+    // 3. Custom Hook example
+    function useWindowWidth() {
+      const [width, setWidth] = useState(window.innerWidth);
+
+      useEffect(() => {
+        function handleResize() {
+          setWidth(window.innerWidth);
+        }
+        window.addEventListener("resize", handleResize);
+
+        return () => window.removeEventListener("resize", handleResize);
+      }, []);
+
+      return width;
+    }
+
+    function ShowWidth() {
+      const width = useWindowWidth();
+      return <p>Window width: {width}px</p>;
+    }
+
+    // Render all examples
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      <div>
+        <h2>Escape Hatches Examples</h2>
+        <InputFocus />
+        <Timer />
+        <ShowWidth />
+      </div>
+    );
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React + TypeScript Examples</title>
+
+    <!-- React & ReactDOM (UMD builds) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Babel with TypeScript support -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <h1>React + TypeScript Examples</h1>
+    <div id="counter"></div>
+    <div id="greeting"></div>
+    <div id="todo"></div>
+
+    <script type="text/babel" data-type="module" data-presets="react,typescript">
+      // Counter Component
+      function Counter() {
+        const [count, setCount] = React.useState<number>(0);
+
+        return (
+          <div>
+            <h2>Counter Example</h2>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increase</button>
+          </div>
+        );
+      }
+
+      // Greeting Component
+      type GreetingProps = {
+        name: string;
+        age?: number;
+      };
+
+      function Greeting({ name, age }: GreetingProps) {
+        return (
+          <div>
+            <h2>Greeting Example</h2>
+            <p>
+              Hello {name}! {age && `You are ${age} years old.`}
+            </p>
+          </div>
+        );
+      }
+
+      // TodoItem Component
+      type TodoProps = {
+        title: string;
+        completed?: boolean;
+      };
+
+      function TodoItem({ title, completed = false }: TodoProps) {
+        const [isDone, setIsDone] = React.useState<boolean>(completed);
+
+        return (
+          <div>
+            <h2>Todo Example</h2>
+            <label>
+              <input
+                type="checkbox"
+                checked={isDone}
+                onChange={() => setIsDone(!isDone)}
+              />
+              {title}
+            </label>
+          </div>
+        );
+      }
+
+      // Render Components
+      const root1 = ReactDOM.createRoot(document.getElementById("counter"));
+      root1.render(<Counter />);
+
+      const root2 = ReactDOM.createRoot(document.getElementById("greeting"));
+      root2.render(<Greeting name="Tayyab" age={25} />);
+
+      const root3 = ReactDOM.createRoot(document.getElementById("todo"));
+      root3.render(<TodoItem title="Learn TypeScript" completed={true} />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thinking in React Example</title>
+    <!-- React and ReactDOM (UMD builds) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel for JSX support -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      // ✅ ProductRow: Displays a single product row
+      function ProductRow({ product }) {
+        return (
+          <tr>
+            <td>{product.name}</td>
+            <td>{product.price}</td>
+          </tr>
+        );
+      }
+
+      // ✅ ProductTable: Displays list of products (filtered)
+      function ProductTable({ products, filterText }) {
+        const rows = products
+          .filter((p) =>
+            p.name.toLowerCase().includes(filterText.toLowerCase())
+          )
+          .map((p, index) => <ProductRow key={index} product={p} />);
+
+        return (
+          <table border="1" cellPadding="5">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </table>
+        );
+      }
+
+      // ✅ SearchBar: Lets user type filter text
+      function SearchBar({ filterText, onFilterChange }) {
+        return (
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={filterText}
+            onChange={(e) => onFilterChange(e.target.value)}
+          />
+        );
+      }
+
+      // ✅ App: Holds state & connects everything
+      function App() {
+        const [filterText, setFilterText] = useState("");
+
+        const products = [
+          { name: "Apple", price: "$1" },
+          { name: "Banana", price: "$0.5" },
+          { name: "Orange", price: "$0.8" },
+          { name: "Mango", price: "$1.2" },
+        ];
+
+        return (
+          <div style={{ padding: "20px", fontFamily: "Arial" }}>
+            <h2>🍎 Product Search</h2>
+            {/* Data Flow: State is lifted to App */}
+            <SearchBar filterText={filterText} onFilterChange={setFilterText} />
+            <br /><br />
+            <ProductTable products={products} filterText={filterText} />
+          </div>
+        );
+      }
+
+      // Render App into #root
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
